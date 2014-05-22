@@ -7,6 +7,7 @@
 ## Takes as input an invertible matrix
 ## Actual "object" returned is an R list containing 4 functions
 makeCacheMatrix <- function(x = matrix()) {
+    
     # The following code runs when a specific method is not accessed
     inv <- NULL
     
@@ -31,8 +32,8 @@ makeCacheMatrix <- function(x = matrix()) {
         inv
     }
     
-    # Create the R list containing 4 functions, which is what is
-    # actually returned
+    # Create the R list containing 4 functions, 
+    # which is what is actually returned
     list (set = set,
           get = get,
           setcache = setcache,
@@ -45,8 +46,7 @@ makeCacheMatrix <- function(x = matrix()) {
 ## If the inverse has previously been calculated and cached, return that
 ## Otherwise calculate the inverse, cache that result, and return that result
 cacheSolve <- function(x, ...) {
-    ## Return a matrix that is the inverse of 'x'
-    
+
     # First see if the inverse has already been cached
     inv <- x$getcache()
     if (!is.null(inv)) {
@@ -54,6 +54,7 @@ cacheSolve <- function(x, ...) {
         return(inv)        
     }
     
+    # Fall through to here if inverse not already in cache
     data <- x$get()
     inv <- solve(data, ...)
     x$setcache(inv)
